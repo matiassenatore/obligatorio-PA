@@ -1,0 +1,1308 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    EXISTE
+    POR_DEFECTO
+
+Grammar
+
+Rule 0     S' -> query
+Rule 1     query -> select_statement
+Rule 2     query -> insert_statement
+Rule 3     query -> update_statement
+Rule 4     query -> delete_statement
+Rule 5     query -> alter_statement
+Rule 6     query -> create_table_statement
+Rule 7     query -> drop_table_statement
+Rule 8     select_statement -> TRAEME select_list DE_LA_TABLA ID join_clause optional_clauses
+Rule 9     select_list -> TODO
+Rule 10    select_list -> LOS_DISTINTOS ID
+Rule 11    select_list -> CONTANDO PARENTESIS_IZQ TODO PARENTESIS_DER
+Rule 12    join_clause -> MEZCLANDO ID EN condition
+Rule 13    join_clause -> empty
+Rule 14    optional_clauses -> where_clause group_by_clause having_clause order_by_clause limit_clause
+Rule 15    where_clause -> DONDE condition
+Rule 16    where_clause -> empty
+Rule 17    group_by_clause -> AGRUPANDO_POR ID
+Rule 18    group_by_clause -> empty
+Rule 19    having_clause -> WHERE_DEL_GROUP_BY condition
+Rule 20    having_clause -> empty
+Rule 21    order_by_clause -> ORDENA_POR ID
+Rule 22    order_by_clause -> empty
+Rule 23    limit_clause -> COMO_MUCHO NUMERO
+Rule 24    limit_clause -> empty
+Rule 25    condition -> ID = value
+Rule 26    condition -> ID > value
+Rule 27    condition -> ID < value
+Rule 28    condition -> ID ENTRE value Y value
+Rule 29    condition -> ID PARECIDO_A CADENA
+Rule 30    condition -> ID ES_NULO
+Rule 31    insert_statement -> METE_EN ID PARENTESIS_IZQ column_list PARENTESIS_DER LOS_VALORES PARENTESIS_IZQ value_list PARENTESIS_DER
+Rule 32    column_list -> ID
+Rule 33    column_list -> column_list COMA ID
+Rule 34    value_list -> value
+Rule 35    value_list -> value_list COMA value
+Rule 36    update_statement -> ACTUALIZA ID SETEA ID = value where_clause
+Rule 37    value -> CADENA
+Rule 38    value -> NUMERO
+Rule 39    delete_statement -> BORRA_DE_LA ID where_clause
+Rule 40    alter_statement -> CAMBIA_LA_TABLA ID alter_action
+Rule 41    alter_action -> AGREGA_LA_COLUMNA ID type not_null
+Rule 42    alter_action -> ELIMINA_LA_COLUMNA ID
+Rule 43    type -> ID
+Rule 44    not_null -> NO_NULO
+Rule 45    not_null -> empty
+Rule 46    create_table_statement -> CREA_LA_TABLA ID PARENTESIS_IZQ column_definitions PARENTESIS_DER
+Rule 47    column_definitions -> column_definition
+Rule 48    column_definitions -> column_definitions COMA column_definition
+Rule 49    column_definition -> ID type column_constraints
+Rule 50    column_constraints -> not_null
+Rule 51    column_constraints -> UNICO
+Rule 52    column_constraints -> CLAVE_PRIMA
+Rule 53    column_constraints -> CLAVE_REFERENTE PARENTESIS_IZQ ID PARENTESIS_DER
+Rule 54    column_constraints -> empty
+Rule 55    drop_table_statement -> TIRA_LA_TABLA ID
+Rule 56    empty -> <empty>
+
+Terminals, with rules where they appear
+
+<                    : 27
+=                    : 25 36
+>                    : 26
+ACTUALIZA            : 36
+AGREGA_LA_COLUMNA    : 41
+AGRUPANDO_POR        : 17
+BORRA_DE_LA          : 39
+CADENA               : 29 37
+CAMBIA_LA_TABLA      : 40
+CLAVE_PRIMA          : 52
+CLAVE_REFERENTE      : 53
+COMA                 : 33 35 48
+COMO_MUCHO           : 23
+CONTANDO             : 11
+CREA_LA_TABLA        : 46
+DE_LA_TABLA          : 8
+DONDE                : 15
+ELIMINA_LA_COLUMNA   : 42
+EN                   : 12
+ENTRE                : 28
+ES_NULO              : 30
+EXISTE               : 
+ID                   : 8 10 12 17 21 25 26 27 28 29 30 31 32 33 36 36 39 40 41 42 43 46 49 53 55
+LOS_DISTINTOS        : 10
+LOS_VALORES          : 31
+METE_EN              : 31
+MEZCLANDO            : 12
+NO_NULO              : 44
+NUMERO               : 23 38
+ORDENA_POR           : 21
+PARECIDO_A           : 29
+PARENTESIS_DER       : 11 31 31 46 53
+PARENTESIS_IZQ       : 11 31 31 46 53
+POR_DEFECTO          : 
+SETEA                : 36
+TIRA_LA_TABLA        : 55
+TODO                 : 9 11
+TRAEME               : 8
+UNICO                : 51
+WHERE_DEL_GROUP_BY   : 19
+Y                    : 28
+error                : 
+
+Nonterminals, with rules where they appear
+
+alter_action         : 40
+alter_statement      : 5
+column_constraints   : 49
+column_definition    : 47 48
+column_definitions   : 46 48
+column_list          : 31 33
+condition            : 12 15 19
+create_table_statement : 6
+delete_statement     : 4
+drop_table_statement : 7
+empty                : 13 16 18 20 22 24 45 54
+group_by_clause      : 14
+having_clause        : 14
+insert_statement     : 2
+join_clause          : 8
+limit_clause         : 14
+not_null             : 41 50
+optional_clauses     : 8
+order_by_clause      : 14
+query                : 0
+select_list          : 8
+select_statement     : 1
+type                 : 41 49
+update_statement     : 3
+value                : 25 26 27 28 28 34 35 36
+value_list           : 31 35
+where_clause         : 14 36 39
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . query
+    (1) query -> . select_statement
+    (2) query -> . insert_statement
+    (3) query -> . update_statement
+    (4) query -> . delete_statement
+    (5) query -> . alter_statement
+    (6) query -> . create_table_statement
+    (7) query -> . drop_table_statement
+    (8) select_statement -> . TRAEME select_list DE_LA_TABLA ID join_clause optional_clauses
+    (31) insert_statement -> . METE_EN ID PARENTESIS_IZQ column_list PARENTESIS_DER LOS_VALORES PARENTESIS_IZQ value_list PARENTESIS_DER
+    (36) update_statement -> . ACTUALIZA ID SETEA ID = value where_clause
+    (39) delete_statement -> . BORRA_DE_LA ID where_clause
+    (40) alter_statement -> . CAMBIA_LA_TABLA ID alter_action
+    (46) create_table_statement -> . CREA_LA_TABLA ID PARENTESIS_IZQ column_definitions PARENTESIS_DER
+    (55) drop_table_statement -> . TIRA_LA_TABLA ID
+
+    TRAEME          shift and go to state 9
+    METE_EN         shift and go to state 10
+    ACTUALIZA       shift and go to state 11
+    BORRA_DE_LA     shift and go to state 12
+    CAMBIA_LA_TABLA shift and go to state 13
+    CREA_LA_TABLA   shift and go to state 14
+    TIRA_LA_TABLA   shift and go to state 15
+
+    query                          shift and go to state 1
+    select_statement               shift and go to state 2
+    insert_statement               shift and go to state 3
+    update_statement               shift and go to state 4
+    delete_statement               shift and go to state 5
+    alter_statement                shift and go to state 6
+    create_table_statement         shift and go to state 7
+    drop_table_statement           shift and go to state 8
+
+state 1
+
+    (0) S' -> query .
+
+
+
+state 2
+
+    (1) query -> select_statement .
+
+    $end            reduce using rule 1 (query -> select_statement .)
+
+
+state 3
+
+    (2) query -> insert_statement .
+
+    $end            reduce using rule 2 (query -> insert_statement .)
+
+
+state 4
+
+    (3) query -> update_statement .
+
+    $end            reduce using rule 3 (query -> update_statement .)
+
+
+state 5
+
+    (4) query -> delete_statement .
+
+    $end            reduce using rule 4 (query -> delete_statement .)
+
+
+state 6
+
+    (5) query -> alter_statement .
+
+    $end            reduce using rule 5 (query -> alter_statement .)
+
+
+state 7
+
+    (6) query -> create_table_statement .
+
+    $end            reduce using rule 6 (query -> create_table_statement .)
+
+
+state 8
+
+    (7) query -> drop_table_statement .
+
+    $end            reduce using rule 7 (query -> drop_table_statement .)
+
+
+state 9
+
+    (8) select_statement -> TRAEME . select_list DE_LA_TABLA ID join_clause optional_clauses
+    (9) select_list -> . TODO
+    (10) select_list -> . LOS_DISTINTOS ID
+    (11) select_list -> . CONTANDO PARENTESIS_IZQ TODO PARENTESIS_DER
+
+    TODO            shift and go to state 17
+    LOS_DISTINTOS   shift and go to state 18
+    CONTANDO        shift and go to state 19
+
+    select_list                    shift and go to state 16
+
+state 10
+
+    (31) insert_statement -> METE_EN . ID PARENTESIS_IZQ column_list PARENTESIS_DER LOS_VALORES PARENTESIS_IZQ value_list PARENTESIS_DER
+
+    ID              shift and go to state 20
+
+
+state 11
+
+    (36) update_statement -> ACTUALIZA . ID SETEA ID = value where_clause
+
+    ID              shift and go to state 21
+
+
+state 12
+
+    (39) delete_statement -> BORRA_DE_LA . ID where_clause
+
+    ID              shift and go to state 22
+
+
+state 13
+
+    (40) alter_statement -> CAMBIA_LA_TABLA . ID alter_action
+
+    ID              shift and go to state 23
+
+
+state 14
+
+    (46) create_table_statement -> CREA_LA_TABLA . ID PARENTESIS_IZQ column_definitions PARENTESIS_DER
+
+    ID              shift and go to state 24
+
+
+state 15
+
+    (55) drop_table_statement -> TIRA_LA_TABLA . ID
+
+    ID              shift and go to state 25
+
+
+state 16
+
+    (8) select_statement -> TRAEME select_list . DE_LA_TABLA ID join_clause optional_clauses
+
+    DE_LA_TABLA     shift and go to state 26
+
+
+state 17
+
+    (9) select_list -> TODO .
+
+    DE_LA_TABLA     reduce using rule 9 (select_list -> TODO .)
+
+
+state 18
+
+    (10) select_list -> LOS_DISTINTOS . ID
+
+    ID              shift and go to state 27
+
+
+state 19
+
+    (11) select_list -> CONTANDO . PARENTESIS_IZQ TODO PARENTESIS_DER
+
+    PARENTESIS_IZQ  shift and go to state 28
+
+
+state 20
+
+    (31) insert_statement -> METE_EN ID . PARENTESIS_IZQ column_list PARENTESIS_DER LOS_VALORES PARENTESIS_IZQ value_list PARENTESIS_DER
+
+    PARENTESIS_IZQ  shift and go to state 29
+
+
+state 21
+
+    (36) update_statement -> ACTUALIZA ID . SETEA ID = value where_clause
+
+    SETEA           shift and go to state 30
+
+
+state 22
+
+    (39) delete_statement -> BORRA_DE_LA ID . where_clause
+    (15) where_clause -> . DONDE condition
+    (16) where_clause -> . empty
+    (56) empty -> .
+
+    DONDE           shift and go to state 32
+    $end            reduce using rule 56 (empty -> .)
+
+    where_clause                   shift and go to state 31
+    empty                          shift and go to state 33
+
+state 23
+
+    (40) alter_statement -> CAMBIA_LA_TABLA ID . alter_action
+    (41) alter_action -> . AGREGA_LA_COLUMNA ID type not_null
+    (42) alter_action -> . ELIMINA_LA_COLUMNA ID
+
+    AGREGA_LA_COLUMNA shift and go to state 35
+    ELIMINA_LA_COLUMNA shift and go to state 36
+
+    alter_action                   shift and go to state 34
+
+state 24
+
+    (46) create_table_statement -> CREA_LA_TABLA ID . PARENTESIS_IZQ column_definitions PARENTESIS_DER
+
+    PARENTESIS_IZQ  shift and go to state 37
+
+
+state 25
+
+    (55) drop_table_statement -> TIRA_LA_TABLA ID .
+
+    $end            reduce using rule 55 (drop_table_statement -> TIRA_LA_TABLA ID .)
+
+
+state 26
+
+    (8) select_statement -> TRAEME select_list DE_LA_TABLA . ID join_clause optional_clauses
+
+    ID              shift and go to state 38
+
+
+state 27
+
+    (10) select_list -> LOS_DISTINTOS ID .
+
+    DE_LA_TABLA     reduce using rule 10 (select_list -> LOS_DISTINTOS ID .)
+
+
+state 28
+
+    (11) select_list -> CONTANDO PARENTESIS_IZQ . TODO PARENTESIS_DER
+
+    TODO            shift and go to state 39
+
+
+state 29
+
+    (31) insert_statement -> METE_EN ID PARENTESIS_IZQ . column_list PARENTESIS_DER LOS_VALORES PARENTESIS_IZQ value_list PARENTESIS_DER
+    (32) column_list -> . ID
+    (33) column_list -> . column_list COMA ID
+
+    ID              shift and go to state 40
+
+    column_list                    shift and go to state 41
+
+state 30
+
+    (36) update_statement -> ACTUALIZA ID SETEA . ID = value where_clause
+
+    ID              shift and go to state 42
+
+
+state 31
+
+    (39) delete_statement -> BORRA_DE_LA ID where_clause .
+
+    $end            reduce using rule 39 (delete_statement -> BORRA_DE_LA ID where_clause .)
+
+
+state 32
+
+    (15) where_clause -> DONDE . condition
+    (25) condition -> . ID = value
+    (26) condition -> . ID > value
+    (27) condition -> . ID < value
+    (28) condition -> . ID ENTRE value Y value
+    (29) condition -> . ID PARECIDO_A CADENA
+    (30) condition -> . ID ES_NULO
+
+    ID              shift and go to state 44
+
+    condition                      shift and go to state 43
+
+state 33
+
+    (16) where_clause -> empty .
+
+    $end            reduce using rule 16 (where_clause -> empty .)
+    AGRUPANDO_POR   reduce using rule 16 (where_clause -> empty .)
+    WHERE_DEL_GROUP_BY reduce using rule 16 (where_clause -> empty .)
+    ORDENA_POR      reduce using rule 16 (where_clause -> empty .)
+    COMO_MUCHO      reduce using rule 16 (where_clause -> empty .)
+
+
+state 34
+
+    (40) alter_statement -> CAMBIA_LA_TABLA ID alter_action .
+
+    $end            reduce using rule 40 (alter_statement -> CAMBIA_LA_TABLA ID alter_action .)
+
+
+state 35
+
+    (41) alter_action -> AGREGA_LA_COLUMNA . ID type not_null
+
+    ID              shift and go to state 45
+
+
+state 36
+
+    (42) alter_action -> ELIMINA_LA_COLUMNA . ID
+
+    ID              shift and go to state 46
+
+
+state 37
+
+    (46) create_table_statement -> CREA_LA_TABLA ID PARENTESIS_IZQ . column_definitions PARENTESIS_DER
+    (47) column_definitions -> . column_definition
+    (48) column_definitions -> . column_definitions COMA column_definition
+    (49) column_definition -> . ID type column_constraints
+
+    ID              shift and go to state 47
+
+    column_definitions             shift and go to state 48
+    column_definition              shift and go to state 49
+
+state 38
+
+    (8) select_statement -> TRAEME select_list DE_LA_TABLA ID . join_clause optional_clauses
+    (12) join_clause -> . MEZCLANDO ID EN condition
+    (13) join_clause -> . empty
+    (56) empty -> .
+
+    MEZCLANDO       shift and go to state 51
+    DONDE           reduce using rule 56 (empty -> .)
+    AGRUPANDO_POR   reduce using rule 56 (empty -> .)
+    WHERE_DEL_GROUP_BY reduce using rule 56 (empty -> .)
+    ORDENA_POR      reduce using rule 56 (empty -> .)
+    COMO_MUCHO      reduce using rule 56 (empty -> .)
+    $end            reduce using rule 56 (empty -> .)
+
+    join_clause                    shift and go to state 50
+    empty                          shift and go to state 52
+
+state 39
+
+    (11) select_list -> CONTANDO PARENTESIS_IZQ TODO . PARENTESIS_DER
+
+    PARENTESIS_DER  shift and go to state 53
+
+
+state 40
+
+    (32) column_list -> ID .
+
+    PARENTESIS_DER  reduce using rule 32 (column_list -> ID .)
+    COMA            reduce using rule 32 (column_list -> ID .)
+
+
+state 41
+
+    (31) insert_statement -> METE_EN ID PARENTESIS_IZQ column_list . PARENTESIS_DER LOS_VALORES PARENTESIS_IZQ value_list PARENTESIS_DER
+    (33) column_list -> column_list . COMA ID
+
+    PARENTESIS_DER  shift and go to state 54
+    COMA            shift and go to state 55
+
+
+state 42
+
+    (36) update_statement -> ACTUALIZA ID SETEA ID . = value where_clause
+
+    =               shift and go to state 56
+
+
+state 43
+
+    (15) where_clause -> DONDE condition .
+
+    $end            reduce using rule 15 (where_clause -> DONDE condition .)
+    AGRUPANDO_POR   reduce using rule 15 (where_clause -> DONDE condition .)
+    WHERE_DEL_GROUP_BY reduce using rule 15 (where_clause -> DONDE condition .)
+    ORDENA_POR      reduce using rule 15 (where_clause -> DONDE condition .)
+    COMO_MUCHO      reduce using rule 15 (where_clause -> DONDE condition .)
+
+
+state 44
+
+    (25) condition -> ID . = value
+    (26) condition -> ID . > value
+    (27) condition -> ID . < value
+    (28) condition -> ID . ENTRE value Y value
+    (29) condition -> ID . PARECIDO_A CADENA
+    (30) condition -> ID . ES_NULO
+
+    =               shift and go to state 57
+    >               shift and go to state 58
+    <               shift and go to state 59
+    ENTRE           shift and go to state 60
+    PARECIDO_A      shift and go to state 61
+    ES_NULO         shift and go to state 62
+
+
+state 45
+
+    (41) alter_action -> AGREGA_LA_COLUMNA ID . type not_null
+    (43) type -> . ID
+
+    ID              shift and go to state 63
+
+    type                           shift and go to state 64
+
+state 46
+
+    (42) alter_action -> ELIMINA_LA_COLUMNA ID .
+
+    $end            reduce using rule 42 (alter_action -> ELIMINA_LA_COLUMNA ID .)
+
+
+state 47
+
+    (49) column_definition -> ID . type column_constraints
+    (43) type -> . ID
+
+    ID              shift and go to state 63
+
+    type                           shift and go to state 65
+
+state 48
+
+    (46) create_table_statement -> CREA_LA_TABLA ID PARENTESIS_IZQ column_definitions . PARENTESIS_DER
+    (48) column_definitions -> column_definitions . COMA column_definition
+
+    PARENTESIS_DER  shift and go to state 66
+    COMA            shift and go to state 67
+
+
+state 49
+
+    (47) column_definitions -> column_definition .
+
+    PARENTESIS_DER  reduce using rule 47 (column_definitions -> column_definition .)
+    COMA            reduce using rule 47 (column_definitions -> column_definition .)
+
+
+state 50
+
+    (8) select_statement -> TRAEME select_list DE_LA_TABLA ID join_clause . optional_clauses
+    (14) optional_clauses -> . where_clause group_by_clause having_clause order_by_clause limit_clause
+    (15) where_clause -> . DONDE condition
+    (16) where_clause -> . empty
+    (56) empty -> .
+
+    DONDE           shift and go to state 32
+    AGRUPANDO_POR   reduce using rule 56 (empty -> .)
+    WHERE_DEL_GROUP_BY reduce using rule 56 (empty -> .)
+    ORDENA_POR      reduce using rule 56 (empty -> .)
+    COMO_MUCHO      reduce using rule 56 (empty -> .)
+    $end            reduce using rule 56 (empty -> .)
+
+    optional_clauses               shift and go to state 68
+    where_clause                   shift and go to state 69
+    empty                          shift and go to state 33
+
+state 51
+
+    (12) join_clause -> MEZCLANDO . ID EN condition
+
+    ID              shift and go to state 70
+
+
+state 52
+
+    (13) join_clause -> empty .
+
+    DONDE           reduce using rule 13 (join_clause -> empty .)
+    AGRUPANDO_POR   reduce using rule 13 (join_clause -> empty .)
+    WHERE_DEL_GROUP_BY reduce using rule 13 (join_clause -> empty .)
+    ORDENA_POR      reduce using rule 13 (join_clause -> empty .)
+    COMO_MUCHO      reduce using rule 13 (join_clause -> empty .)
+    $end            reduce using rule 13 (join_clause -> empty .)
+
+
+state 53
+
+    (11) select_list -> CONTANDO PARENTESIS_IZQ TODO PARENTESIS_DER .
+
+    DE_LA_TABLA     reduce using rule 11 (select_list -> CONTANDO PARENTESIS_IZQ TODO PARENTESIS_DER .)
+
+
+state 54
+
+    (31) insert_statement -> METE_EN ID PARENTESIS_IZQ column_list PARENTESIS_DER . LOS_VALORES PARENTESIS_IZQ value_list PARENTESIS_DER
+
+    LOS_VALORES     shift and go to state 71
+
+
+state 55
+
+    (33) column_list -> column_list COMA . ID
+
+    ID              shift and go to state 72
+
+
+state 56
+
+    (36) update_statement -> ACTUALIZA ID SETEA ID = . value where_clause
+    (37) value -> . CADENA
+    (38) value -> . NUMERO
+
+    CADENA          shift and go to state 74
+    NUMERO          shift and go to state 75
+
+    value                          shift and go to state 73
+
+state 57
+
+    (25) condition -> ID = . value
+    (37) value -> . CADENA
+    (38) value -> . NUMERO
+
+    CADENA          shift and go to state 74
+    NUMERO          shift and go to state 75
+
+    value                          shift and go to state 76
+
+state 58
+
+    (26) condition -> ID > . value
+    (37) value -> . CADENA
+    (38) value -> . NUMERO
+
+    CADENA          shift and go to state 74
+    NUMERO          shift and go to state 75
+
+    value                          shift and go to state 77
+
+state 59
+
+    (27) condition -> ID < . value
+    (37) value -> . CADENA
+    (38) value -> . NUMERO
+
+    CADENA          shift and go to state 74
+    NUMERO          shift and go to state 75
+
+    value                          shift and go to state 78
+
+state 60
+
+    (28) condition -> ID ENTRE . value Y value
+    (37) value -> . CADENA
+    (38) value -> . NUMERO
+
+    CADENA          shift and go to state 74
+    NUMERO          shift and go to state 75
+
+    value                          shift and go to state 79
+
+state 61
+
+    (29) condition -> ID PARECIDO_A . CADENA
+
+    CADENA          shift and go to state 80
+
+
+state 62
+
+    (30) condition -> ID ES_NULO .
+
+    $end            reduce using rule 30 (condition -> ID ES_NULO .)
+    AGRUPANDO_POR   reduce using rule 30 (condition -> ID ES_NULO .)
+    WHERE_DEL_GROUP_BY reduce using rule 30 (condition -> ID ES_NULO .)
+    ORDENA_POR      reduce using rule 30 (condition -> ID ES_NULO .)
+    COMO_MUCHO      reduce using rule 30 (condition -> ID ES_NULO .)
+    DONDE           reduce using rule 30 (condition -> ID ES_NULO .)
+
+
+state 63
+
+    (43) type -> ID .
+
+    NO_NULO         reduce using rule 43 (type -> ID .)
+    $end            reduce using rule 43 (type -> ID .)
+    UNICO           reduce using rule 43 (type -> ID .)
+    CLAVE_PRIMA     reduce using rule 43 (type -> ID .)
+    CLAVE_REFERENTE reduce using rule 43 (type -> ID .)
+    PARENTESIS_DER  reduce using rule 43 (type -> ID .)
+    COMA            reduce using rule 43 (type -> ID .)
+
+
+state 64
+
+    (41) alter_action -> AGREGA_LA_COLUMNA ID type . not_null
+    (44) not_null -> . NO_NULO
+    (45) not_null -> . empty
+    (56) empty -> .
+
+    NO_NULO         shift and go to state 82
+    $end            reduce using rule 56 (empty -> .)
+
+    not_null                       shift and go to state 81
+    empty                          shift and go to state 83
+
+state 65
+
+    (49) column_definition -> ID type . column_constraints
+    (50) column_constraints -> . not_null
+    (51) column_constraints -> . UNICO
+    (52) column_constraints -> . CLAVE_PRIMA
+    (53) column_constraints -> . CLAVE_REFERENTE PARENTESIS_IZQ ID PARENTESIS_DER
+    (54) column_constraints -> . empty
+    (44) not_null -> . NO_NULO
+    (45) not_null -> . empty
+    (56) empty -> .
+
+    UNICO           shift and go to state 86
+    CLAVE_PRIMA     shift and go to state 87
+    CLAVE_REFERENTE shift and go to state 88
+    NO_NULO         shift and go to state 82
+    PARENTESIS_DER  reduce using rule 56 (empty -> .)
+    COMA            reduce using rule 56 (empty -> .)
+
+    column_constraints             shift and go to state 84
+    not_null                       shift and go to state 85
+    empty                          shift and go to state 89
+
+state 66
+
+    (46) create_table_statement -> CREA_LA_TABLA ID PARENTESIS_IZQ column_definitions PARENTESIS_DER .
+
+    $end            reduce using rule 46 (create_table_statement -> CREA_LA_TABLA ID PARENTESIS_IZQ column_definitions PARENTESIS_DER .)
+
+
+state 67
+
+    (48) column_definitions -> column_definitions COMA . column_definition
+    (49) column_definition -> . ID type column_constraints
+
+    ID              shift and go to state 47
+
+    column_definition              shift and go to state 90
+
+state 68
+
+    (8) select_statement -> TRAEME select_list DE_LA_TABLA ID join_clause optional_clauses .
+
+    $end            reduce using rule 8 (select_statement -> TRAEME select_list DE_LA_TABLA ID join_clause optional_clauses .)
+
+
+state 69
+
+    (14) optional_clauses -> where_clause . group_by_clause having_clause order_by_clause limit_clause
+    (17) group_by_clause -> . AGRUPANDO_POR ID
+    (18) group_by_clause -> . empty
+    (56) empty -> .
+
+    AGRUPANDO_POR   shift and go to state 92
+    WHERE_DEL_GROUP_BY reduce using rule 56 (empty -> .)
+    ORDENA_POR      reduce using rule 56 (empty -> .)
+    COMO_MUCHO      reduce using rule 56 (empty -> .)
+    $end            reduce using rule 56 (empty -> .)
+
+    group_by_clause                shift and go to state 91
+    empty                          shift and go to state 93
+
+state 70
+
+    (12) join_clause -> MEZCLANDO ID . EN condition
+
+    EN              shift and go to state 94
+
+
+state 71
+
+    (31) insert_statement -> METE_EN ID PARENTESIS_IZQ column_list PARENTESIS_DER LOS_VALORES . PARENTESIS_IZQ value_list PARENTESIS_DER
+
+    PARENTESIS_IZQ  shift and go to state 95
+
+
+state 72
+
+    (33) column_list -> column_list COMA ID .
+
+    PARENTESIS_DER  reduce using rule 33 (column_list -> column_list COMA ID .)
+    COMA            reduce using rule 33 (column_list -> column_list COMA ID .)
+
+
+state 73
+
+    (36) update_statement -> ACTUALIZA ID SETEA ID = value . where_clause
+    (15) where_clause -> . DONDE condition
+    (16) where_clause -> . empty
+    (56) empty -> .
+
+    DONDE           shift and go to state 32
+    $end            reduce using rule 56 (empty -> .)
+
+    where_clause                   shift and go to state 96
+    empty                          shift and go to state 33
+
+state 74
+
+    (37) value -> CADENA .
+
+    DONDE           reduce using rule 37 (value -> CADENA .)
+    $end            reduce using rule 37 (value -> CADENA .)
+    AGRUPANDO_POR   reduce using rule 37 (value -> CADENA .)
+    WHERE_DEL_GROUP_BY reduce using rule 37 (value -> CADENA .)
+    ORDENA_POR      reduce using rule 37 (value -> CADENA .)
+    COMO_MUCHO      reduce using rule 37 (value -> CADENA .)
+    Y               reduce using rule 37 (value -> CADENA .)
+    PARENTESIS_DER  reduce using rule 37 (value -> CADENA .)
+    COMA            reduce using rule 37 (value -> CADENA .)
+
+
+state 75
+
+    (38) value -> NUMERO .
+
+    DONDE           reduce using rule 38 (value -> NUMERO .)
+    $end            reduce using rule 38 (value -> NUMERO .)
+    AGRUPANDO_POR   reduce using rule 38 (value -> NUMERO .)
+    WHERE_DEL_GROUP_BY reduce using rule 38 (value -> NUMERO .)
+    ORDENA_POR      reduce using rule 38 (value -> NUMERO .)
+    COMO_MUCHO      reduce using rule 38 (value -> NUMERO .)
+    Y               reduce using rule 38 (value -> NUMERO .)
+    PARENTESIS_DER  reduce using rule 38 (value -> NUMERO .)
+    COMA            reduce using rule 38 (value -> NUMERO .)
+
+
+state 76
+
+    (25) condition -> ID = value .
+
+    $end            reduce using rule 25 (condition -> ID = value .)
+    AGRUPANDO_POR   reduce using rule 25 (condition -> ID = value .)
+    WHERE_DEL_GROUP_BY reduce using rule 25 (condition -> ID = value .)
+    ORDENA_POR      reduce using rule 25 (condition -> ID = value .)
+    COMO_MUCHO      reduce using rule 25 (condition -> ID = value .)
+    DONDE           reduce using rule 25 (condition -> ID = value .)
+
+
+state 77
+
+    (26) condition -> ID > value .
+
+    $end            reduce using rule 26 (condition -> ID > value .)
+    AGRUPANDO_POR   reduce using rule 26 (condition -> ID > value .)
+    WHERE_DEL_GROUP_BY reduce using rule 26 (condition -> ID > value .)
+    ORDENA_POR      reduce using rule 26 (condition -> ID > value .)
+    COMO_MUCHO      reduce using rule 26 (condition -> ID > value .)
+    DONDE           reduce using rule 26 (condition -> ID > value .)
+
+
+state 78
+
+    (27) condition -> ID < value .
+
+    $end            reduce using rule 27 (condition -> ID < value .)
+    AGRUPANDO_POR   reduce using rule 27 (condition -> ID < value .)
+    WHERE_DEL_GROUP_BY reduce using rule 27 (condition -> ID < value .)
+    ORDENA_POR      reduce using rule 27 (condition -> ID < value .)
+    COMO_MUCHO      reduce using rule 27 (condition -> ID < value .)
+    DONDE           reduce using rule 27 (condition -> ID < value .)
+
+
+state 79
+
+    (28) condition -> ID ENTRE value . Y value
+
+    Y               shift and go to state 97
+
+
+state 80
+
+    (29) condition -> ID PARECIDO_A CADENA .
+
+    $end            reduce using rule 29 (condition -> ID PARECIDO_A CADENA .)
+    AGRUPANDO_POR   reduce using rule 29 (condition -> ID PARECIDO_A CADENA .)
+    WHERE_DEL_GROUP_BY reduce using rule 29 (condition -> ID PARECIDO_A CADENA .)
+    ORDENA_POR      reduce using rule 29 (condition -> ID PARECIDO_A CADENA .)
+    COMO_MUCHO      reduce using rule 29 (condition -> ID PARECIDO_A CADENA .)
+    DONDE           reduce using rule 29 (condition -> ID PARECIDO_A CADENA .)
+
+
+state 81
+
+    (41) alter_action -> AGREGA_LA_COLUMNA ID type not_null .
+
+    $end            reduce using rule 41 (alter_action -> AGREGA_LA_COLUMNA ID type not_null .)
+
+
+state 82
+
+    (44) not_null -> NO_NULO .
+
+    $end            reduce using rule 44 (not_null -> NO_NULO .)
+    PARENTESIS_DER  reduce using rule 44 (not_null -> NO_NULO .)
+    COMA            reduce using rule 44 (not_null -> NO_NULO .)
+
+
+state 83
+
+    (45) not_null -> empty .
+
+    $end            reduce using rule 45 (not_null -> empty .)
+
+
+state 84
+
+    (49) column_definition -> ID type column_constraints .
+
+    PARENTESIS_DER  reduce using rule 49 (column_definition -> ID type column_constraints .)
+    COMA            reduce using rule 49 (column_definition -> ID type column_constraints .)
+
+
+state 85
+
+    (50) column_constraints -> not_null .
+
+    PARENTESIS_DER  reduce using rule 50 (column_constraints -> not_null .)
+    COMA            reduce using rule 50 (column_constraints -> not_null .)
+
+
+state 86
+
+    (51) column_constraints -> UNICO .
+
+    PARENTESIS_DER  reduce using rule 51 (column_constraints -> UNICO .)
+    COMA            reduce using rule 51 (column_constraints -> UNICO .)
+
+
+state 87
+
+    (52) column_constraints -> CLAVE_PRIMA .
+
+    PARENTESIS_DER  reduce using rule 52 (column_constraints -> CLAVE_PRIMA .)
+    COMA            reduce using rule 52 (column_constraints -> CLAVE_PRIMA .)
+
+
+state 88
+
+    (53) column_constraints -> CLAVE_REFERENTE . PARENTESIS_IZQ ID PARENTESIS_DER
+
+    PARENTESIS_IZQ  shift and go to state 98
+
+
+state 89
+
+    (54) column_constraints -> empty .
+    (45) not_null -> empty .
+
+  ! reduce/reduce conflict for PARENTESIS_DER resolved using rule 45 (not_null -> empty .)
+  ! reduce/reduce conflict for COMA resolved using rule 45 (not_null -> empty .)
+    PARENTESIS_DER  reduce using rule 45 (not_null -> empty .)
+    COMA            reduce using rule 45 (not_null -> empty .)
+
+  ! PARENTESIS_DER  [ reduce using rule 54 (column_constraints -> empty .) ]
+  ! COMA            [ reduce using rule 54 (column_constraints -> empty .) ]
+
+
+state 90
+
+    (48) column_definitions -> column_definitions COMA column_definition .
+
+    PARENTESIS_DER  reduce using rule 48 (column_definitions -> column_definitions COMA column_definition .)
+    COMA            reduce using rule 48 (column_definitions -> column_definitions COMA column_definition .)
+
+
+state 91
+
+    (14) optional_clauses -> where_clause group_by_clause . having_clause order_by_clause limit_clause
+    (19) having_clause -> . WHERE_DEL_GROUP_BY condition
+    (20) having_clause -> . empty
+    (56) empty -> .
+
+    WHERE_DEL_GROUP_BY shift and go to state 100
+    ORDENA_POR      reduce using rule 56 (empty -> .)
+    COMO_MUCHO      reduce using rule 56 (empty -> .)
+    $end            reduce using rule 56 (empty -> .)
+
+    having_clause                  shift and go to state 99
+    empty                          shift and go to state 101
+
+state 92
+
+    (17) group_by_clause -> AGRUPANDO_POR . ID
+
+    ID              shift and go to state 102
+
+
+state 93
+
+    (18) group_by_clause -> empty .
+
+    WHERE_DEL_GROUP_BY reduce using rule 18 (group_by_clause -> empty .)
+    ORDENA_POR      reduce using rule 18 (group_by_clause -> empty .)
+    COMO_MUCHO      reduce using rule 18 (group_by_clause -> empty .)
+    $end            reduce using rule 18 (group_by_clause -> empty .)
+
+
+state 94
+
+    (12) join_clause -> MEZCLANDO ID EN . condition
+    (25) condition -> . ID = value
+    (26) condition -> . ID > value
+    (27) condition -> . ID < value
+    (28) condition -> . ID ENTRE value Y value
+    (29) condition -> . ID PARECIDO_A CADENA
+    (30) condition -> . ID ES_NULO
+
+    ID              shift and go to state 44
+
+    condition                      shift and go to state 103
+
+state 95
+
+    (31) insert_statement -> METE_EN ID PARENTESIS_IZQ column_list PARENTESIS_DER LOS_VALORES PARENTESIS_IZQ . value_list PARENTESIS_DER
+    (34) value_list -> . value
+    (35) value_list -> . value_list COMA value
+    (37) value -> . CADENA
+    (38) value -> . NUMERO
+
+    CADENA          shift and go to state 74
+    NUMERO          shift and go to state 75
+
+    value_list                     shift and go to state 104
+    value                          shift and go to state 105
+
+state 96
+
+    (36) update_statement -> ACTUALIZA ID SETEA ID = value where_clause .
+
+    $end            reduce using rule 36 (update_statement -> ACTUALIZA ID SETEA ID = value where_clause .)
+
+
+state 97
+
+    (28) condition -> ID ENTRE value Y . value
+    (37) value -> . CADENA
+    (38) value -> . NUMERO
+
+    CADENA          shift and go to state 74
+    NUMERO          shift and go to state 75
+
+    value                          shift and go to state 106
+
+state 98
+
+    (53) column_constraints -> CLAVE_REFERENTE PARENTESIS_IZQ . ID PARENTESIS_DER
+
+    ID              shift and go to state 107
+
+
+state 99
+
+    (14) optional_clauses -> where_clause group_by_clause having_clause . order_by_clause limit_clause
+    (21) order_by_clause -> . ORDENA_POR ID
+    (22) order_by_clause -> . empty
+    (56) empty -> .
+
+    ORDENA_POR      shift and go to state 109
+    COMO_MUCHO      reduce using rule 56 (empty -> .)
+    $end            reduce using rule 56 (empty -> .)
+
+    order_by_clause                shift and go to state 108
+    empty                          shift and go to state 110
+
+state 100
+
+    (19) having_clause -> WHERE_DEL_GROUP_BY . condition
+    (25) condition -> . ID = value
+    (26) condition -> . ID > value
+    (27) condition -> . ID < value
+    (28) condition -> . ID ENTRE value Y value
+    (29) condition -> . ID PARECIDO_A CADENA
+    (30) condition -> . ID ES_NULO
+
+    ID              shift and go to state 44
+
+    condition                      shift and go to state 111
+
+state 101
+
+    (20) having_clause -> empty .
+
+    ORDENA_POR      reduce using rule 20 (having_clause -> empty .)
+    COMO_MUCHO      reduce using rule 20 (having_clause -> empty .)
+    $end            reduce using rule 20 (having_clause -> empty .)
+
+
+state 102
+
+    (17) group_by_clause -> AGRUPANDO_POR ID .
+
+    WHERE_DEL_GROUP_BY reduce using rule 17 (group_by_clause -> AGRUPANDO_POR ID .)
+    ORDENA_POR      reduce using rule 17 (group_by_clause -> AGRUPANDO_POR ID .)
+    COMO_MUCHO      reduce using rule 17 (group_by_clause -> AGRUPANDO_POR ID .)
+    $end            reduce using rule 17 (group_by_clause -> AGRUPANDO_POR ID .)
+
+
+state 103
+
+    (12) join_clause -> MEZCLANDO ID EN condition .
+
+    DONDE           reduce using rule 12 (join_clause -> MEZCLANDO ID EN condition .)
+    AGRUPANDO_POR   reduce using rule 12 (join_clause -> MEZCLANDO ID EN condition .)
+    WHERE_DEL_GROUP_BY reduce using rule 12 (join_clause -> MEZCLANDO ID EN condition .)
+    ORDENA_POR      reduce using rule 12 (join_clause -> MEZCLANDO ID EN condition .)
+    COMO_MUCHO      reduce using rule 12 (join_clause -> MEZCLANDO ID EN condition .)
+    $end            reduce using rule 12 (join_clause -> MEZCLANDO ID EN condition .)
+
+
+state 104
+
+    (31) insert_statement -> METE_EN ID PARENTESIS_IZQ column_list PARENTESIS_DER LOS_VALORES PARENTESIS_IZQ value_list . PARENTESIS_DER
+    (35) value_list -> value_list . COMA value
+
+    PARENTESIS_DER  shift and go to state 112
+    COMA            shift and go to state 113
+
+
+state 105
+
+    (34) value_list -> value .
+
+    PARENTESIS_DER  reduce using rule 34 (value_list -> value .)
+    COMA            reduce using rule 34 (value_list -> value .)
+
+
+state 106
+
+    (28) condition -> ID ENTRE value Y value .
+
+    $end            reduce using rule 28 (condition -> ID ENTRE value Y value .)
+    AGRUPANDO_POR   reduce using rule 28 (condition -> ID ENTRE value Y value .)
+    WHERE_DEL_GROUP_BY reduce using rule 28 (condition -> ID ENTRE value Y value .)
+    ORDENA_POR      reduce using rule 28 (condition -> ID ENTRE value Y value .)
+    COMO_MUCHO      reduce using rule 28 (condition -> ID ENTRE value Y value .)
+    DONDE           reduce using rule 28 (condition -> ID ENTRE value Y value .)
+
+
+state 107
+
+    (53) column_constraints -> CLAVE_REFERENTE PARENTESIS_IZQ ID . PARENTESIS_DER
+
+    PARENTESIS_DER  shift and go to state 114
+
+
+state 108
+
+    (14) optional_clauses -> where_clause group_by_clause having_clause order_by_clause . limit_clause
+    (23) limit_clause -> . COMO_MUCHO NUMERO
+    (24) limit_clause -> . empty
+    (56) empty -> .
+
+    COMO_MUCHO      shift and go to state 116
+    $end            reduce using rule 56 (empty -> .)
+
+    limit_clause                   shift and go to state 115
+    empty                          shift and go to state 117
+
+state 109
+
+    (21) order_by_clause -> ORDENA_POR . ID
+
+    ID              shift and go to state 118
+
+
+state 110
+
+    (22) order_by_clause -> empty .
+
+    COMO_MUCHO      reduce using rule 22 (order_by_clause -> empty .)
+    $end            reduce using rule 22 (order_by_clause -> empty .)
+
+
+state 111
+
+    (19) having_clause -> WHERE_DEL_GROUP_BY condition .
+
+    ORDENA_POR      reduce using rule 19 (having_clause -> WHERE_DEL_GROUP_BY condition .)
+    COMO_MUCHO      reduce using rule 19 (having_clause -> WHERE_DEL_GROUP_BY condition .)
+    $end            reduce using rule 19 (having_clause -> WHERE_DEL_GROUP_BY condition .)
+
+
+state 112
+
+    (31) insert_statement -> METE_EN ID PARENTESIS_IZQ column_list PARENTESIS_DER LOS_VALORES PARENTESIS_IZQ value_list PARENTESIS_DER .
+
+    $end            reduce using rule 31 (insert_statement -> METE_EN ID PARENTESIS_IZQ column_list PARENTESIS_DER LOS_VALORES PARENTESIS_IZQ value_list PARENTESIS_DER .)
+
+
+state 113
+
+    (35) value_list -> value_list COMA . value
+    (37) value -> . CADENA
+    (38) value -> . NUMERO
+
+    CADENA          shift and go to state 74
+    NUMERO          shift and go to state 75
+
+    value                          shift and go to state 119
+
+state 114
+
+    (53) column_constraints -> CLAVE_REFERENTE PARENTESIS_IZQ ID PARENTESIS_DER .
+
+    PARENTESIS_DER  reduce using rule 53 (column_constraints -> CLAVE_REFERENTE PARENTESIS_IZQ ID PARENTESIS_DER .)
+    COMA            reduce using rule 53 (column_constraints -> CLAVE_REFERENTE PARENTESIS_IZQ ID PARENTESIS_DER .)
+
+
+state 115
+
+    (14) optional_clauses -> where_clause group_by_clause having_clause order_by_clause limit_clause .
+
+    $end            reduce using rule 14 (optional_clauses -> where_clause group_by_clause having_clause order_by_clause limit_clause .)
+
+
+state 116
+
+    (23) limit_clause -> COMO_MUCHO . NUMERO
+
+    NUMERO          shift and go to state 120
+
+
+state 117
+
+    (24) limit_clause -> empty .
+
+    $end            reduce using rule 24 (limit_clause -> empty .)
+
+
+state 118
+
+    (21) order_by_clause -> ORDENA_POR ID .
+
+    COMO_MUCHO      reduce using rule 21 (order_by_clause -> ORDENA_POR ID .)
+    $end            reduce using rule 21 (order_by_clause -> ORDENA_POR ID .)
+
+
+state 119
+
+    (35) value_list -> value_list COMA value .
+
+    PARENTESIS_DER  reduce using rule 35 (value_list -> value_list COMA value .)
+    COMA            reduce using rule 35 (value_list -> value_list COMA value .)
+
+
+state 120
+
+    (23) limit_clause -> COMO_MUCHO NUMERO .
+
+    $end            reduce using rule 23 (limit_clause -> COMO_MUCHO NUMERO .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: reduce/reduce conflict in state 89 resolved using rule (not_null -> empty)
+WARNING: rejected rule (column_constraints -> empty) in state 89
+WARNING: Rule (column_constraints -> empty) is never reduced
