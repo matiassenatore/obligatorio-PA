@@ -157,7 +157,7 @@ def start_game():
 
     Esta función es el punto de entrada principal para el juego.
     """
-    questions = load_questions('JEOPARDY_CSV.csv')
+    questions = load_questions('reduced_question_set (1).csv')
     selected_questions = select_random_questions(questions)
     final_score = play_game(selected_questions)
     print(f"Tu puntaje final es: {final_score}")
