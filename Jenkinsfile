@@ -75,19 +75,15 @@ sh 'ls obligatorio-PA/obg1_trivia_2'
     }
     post {
         success {
-            // mail to: "${EMAIL_RECIPIENT}",
-                subject: "Pipeline Completa"
-
-                 body: "La ejecución del pipeline fue exitosa para el Entregable ${params.ENTREGABLE_OPTION}."
+            mail to: "${EMAIL_RECIPIENT}",
+                subject: "Pipeline Completa",
+                body: "La ejecución del pipeline fue exitosa para el Entregable ${params.ENTREGABLE_OPTION}.""
         }
         failure {
             mail to: "${EMAIL_RECIPIENT}",
-                subject: "Pipeline Fallida"
+                subject: "Pipeline Fallida",
+                body: "Hubo un fallo en la ejecución del pipeline para el Entregable ${params.ENTREGABLE_OPTION}. Revisa los detalles en Jenkins para más información."
 
-                 body: "Hubo un fallo en la ejecución del pipeline para el Entregable ${params.ENTREGABLE_OPTION}. Revisa los detalles en Jenkins para más información."
-        }
-    }
-}
 
 
 
