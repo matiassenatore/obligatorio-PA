@@ -74,7 +74,7 @@ pipeline {
     }
     post {
         success {
-            mail to: "${EMAIL_RECIPIENT}", smtpHost: 'smtp.example.com', smtpPort: 587,
+            mail to: "${EMAIL_RECIPIENT}",
                 subject: "Pipeline Completa",
                  body: "La ejecución del pipeline fue exitosa para el Entregable ${params.ENTREGABLE_OPTION}."
         }
@@ -85,5 +85,6 @@ pipeline {
         }
     }
 }
+
 
 
