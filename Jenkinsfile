@@ -20,7 +20,7 @@ pipeline {
                         switch (params.ENTREGABLE_OPTION) {
                             case '1':
                                 echo 'Ejecutando Entregable 1: Trivia'
-                                sh 'python3 "obligatorio-PA/obg1_trivia 2/obg1_prog_avz.py"'
+                                sh 'python3 obligatorio-PA/obg1_trivia\ 2/obg1_prog_avz.py'
                                 break
                             case '2':
                                 echo 'Ejecutando Entregable 2: Procesamiento de Pedidos'
@@ -50,7 +50,7 @@ pipeline {
                     try {
                         echo 'Probando Entregable 1'
                         timeout(time: 5, unit: 'MINUTES') {
-                            sh 'python3 "obligatorio-PA/obg1_trivia 2/obg1_prog_avz.py" --test'
+                            sh 'python3 obligatorio-PA/obg1_trivia\ 2/obg1_prog_avz.py --test'
                         }
 
                         echo 'Probando Entregable 2'
@@ -85,3 +85,4 @@ pipeline {
         }
     }
 }
+
