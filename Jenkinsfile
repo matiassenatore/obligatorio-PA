@@ -16,21 +16,29 @@ pipeline {
         stage('Select Entregable') {
             steps {
                 script {
+                    sh 'pwd'
+                    sh 'ls -la'
                     try {
                         switch (params.ENTREGABLE_OPTION) {
                             case '1':
                                 echo 'Ejecutando Entregable 1: Trivia'
 sh 'ls obligatorio-PA/obg1_trivia_2'
-                                sh 'python3 obligatorio-PA/obg1_trivia_2/obg1_prog_avz.py'
+                                sh 'pwd'
+sh 'ls -la'
+sh 'python3 obligatorio-PA/obg1_trivia_2/obg1_prog_avz.py'
                                 break
                             case '2':
                                 echo 'Ejecutando Entregable 2: Procesamiento de Pedidos'
-                                sh 'javac obligatorio-PA/Entregable_2-1/Entregable2/target/classes/uy/edu/um/Main.java'
+                                sh 'pwd'
+sh 'ls -la'
+sh 'javac obligatorio-PA/Entregable_2-1/Entregable2/target/classes/uy/edu/um/Main.java'
                                 sh 'java -cp obligatorio-PA/Entregable_2-1/Entregable2/target/classes uy.edu.um.Main'
                                 break
                             case '3':
                                 echo 'Ejecutando Entregable 3: Consultas en USQL'
-                                sh 'python3 obligatorio-PA/obligatorio_PA/usql/usql_translator.py'
+                                sh 'pwd'
+sh 'ls -la'
+sh 'python3 obligatorio-PA/obligatorio_PA/usql/usql_translator.py'
                                 break
                             default:
                                 error 'Opción inválida seleccionada'
@@ -75,15 +83,14 @@ sh 'ls obligatorio-PA/obg1_trivia_2'
     }
     post {
         success {
-            mail to: "${EMAIL_RECIPIENT}",
-                subject: "Pipeline Completa",
-                body: "La ejecución del pipeline fue exitosa para el Entregable ${params.ENTREGABLE_OPTION}.""
+            // // mail to: "${EMAIL_RECIPIENT}",
+                // subject: "Pipeline Completa",
+                // body: "La ejecución del pipeline fue exitosa para el Entregable ${params.ENTREGABLE_OPTION}."
         }
         failure {
-            mail to: "${EMAIL_RECIPIENT}",
-                subject: "Pipeline Fallida",
-                body: "Hubo un fallo en la ejecución del pipeline para el Entregable ${params.ENTREGABLE_OPTION}. Revisa los detalles en Jenkins para más información."
-
+            // mail to: "${EMAIL_RECIPIENT}",
+                // subject: "Pipeline Fallida",
+                // body: "Hubo un fallo en la ejecución del pipeline para el Entregable ${params.ENTREGABLE_OPTION}. Revisa los detalles en Jenkins para más información."
 
 
 
