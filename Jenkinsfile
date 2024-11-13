@@ -20,12 +20,12 @@ pipeline {
                         switch (params.ENTREGABLE_OPTION) {
                             case '1':
                                 echo 'Ejecutando Entregable 1: Trivia'
-                                sh 'python3 "obligatorio-PA/obg1_trivia 2/obg1_prog_avz.py"'
+                                sh 'python3 "obligatorio-PA/obg1_trivia_2/obg1_prog_avz.py"'
                                 break
                             case '2':
                                 echo 'Ejecutando Entregable 2: Procesamiento de Pedidos'
-                                sh 'javac obligatorio-PA/Entregable%202-1/Entregable2/target/classes/uy/edu/um/Main.java'
-                                sh 'java -cp obligatorio-PA/Entregable%202-1/Entregable2/target/classes uy.edu.um.Main'
+                                sh 'javac obligatorio-PA/Entregable_2-1/Entregable2/target/classes/uy/edu/um/Main.java'
+                                sh 'java -cp obligatorio-PA/Entregable_2-1/Entregable2/target/classes uy.edu.um.Main'
                                 break
                             case '3':
                                 echo 'Ejecutando Entregable 3: Consultas en USQL'
@@ -50,13 +50,13 @@ pipeline {
                     try {
                         echo 'Probando Entregable 1'
                         timeout(time: 5, unit: 'MINUTES') {
-                            sh 'python3 "obligatorio-PA/obg1_trivia 2/obg1_prog_avz.py" --test'
+                            sh 'python3 "obligatorio-PA/obg1_trivia_2/obg1_prog_avz.py" --test'
                         }
 
                         echo 'Probando Entregable 2'
                         timeout(time: 5, unit: 'MINUTES') {
-                            sh 'javac obligatorio-PA/Entregable%202-1/Entregable2/target/classes/uy/edu/um/Main.java'
-                            sh 'java -cp obligatorio-PA/Entregable%202-1/Entregable2/target/classes uy.edu.um.Main --test'
+                            sh 'javac obligatorio-PA/Entregable_2-1/Entregable2/target/classes/uy/edu/um/Main.java'
+                            sh 'java -cp obligatorio-PA/Entregable_2-1/Entregable2/target/classes uy.edu.um.Main --test'
                         }
 
                         echo 'Probando Entregable 3'
@@ -84,6 +84,8 @@ pipeline {
                  body: "Hubo un fallo en la ejecución del pipeline para el Entregable ${params.ENTREGABLE_OPTION}. Revisa los detalles en Jenkins para más información."
         }
     }
+}
+
 }
 
 
