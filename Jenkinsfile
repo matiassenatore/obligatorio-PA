@@ -23,10 +23,10 @@ pipeline {
                         switch (params.ENTREGABLE_OPTION) {
                             case '1':
                                 echo 'Ejecutando Entregable 1: Trivia'
-                                sh 'ls obligatorio-PA/obg1_trivia_2'  // Lista el contenido del directorio para asegurarnos de que el archivo está allí
+                                sh 'ls obligatorio-PA/obg1_trivia 2'  // Lista el contenido del directorio para asegurarnos de que el archivo está allí
                                 sh 'pwd'
-                                sh 'ls -la obligatorio-PA/obg1_trivia_2'  // Lista los archivos específicos del directorio de trivia
-                                sh 'python3 obligatorio-PA/obg1_trivia_2/obg1_prog_avz.py'
+                                sh 'ls -la obligatorio-PA/obg1_trivia 2'  // Lista los archivos específicos del directorio de trivia
+                                sh 'python3 obligatorio-PA/obg1_trivia 2/obg1_prog_avz.py'
                                 break
                             case '2':
                                 echo 'Ejecutando Entregable 2: Procesamiento de Pedidos'
@@ -60,8 +60,8 @@ pipeline {
                     try {
                         echo 'Probando Entregable 1'
                         timeout(time: 5, unit: 'MINUTES') {
-                            sh 'ls -la obligatorio-PA/obg1_trivia_2'  // Lista los archivos antes de la prueba
-                            sh 'python3 obligatorio-PA/obg1_trivia_2/obg1_prog_avz.py --test'
+                            sh 'ls -la obligatorio-PA/obg1_trivia 2'  // Lista los archivos antes de la prueba
+                            sh 'python3 obligatorio-PA/obg1_trivia 2/obg1_prog_avz.py --test'
                         }
 
                         echo 'Probando Entregable 2'
