@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clona el repositorio
-                git url: 'https://github.com/matiassenatore/obligatorio-PA.git', branch: 'main'
+                git url: 'https://github.com/matiassenatore/obligatorio-PA.git', branch: 'main', credentialsId: 'your-credentials-id'
             }
         }
         stage('Select Entregable') {
@@ -20,16 +20,16 @@ pipeline {
                         switch (params.ENTREGABLE_OPTION) {
                             case '1':
                                 echo 'Ejecutando Entregable 1: Trivia'
-                                sh 'python3 "obligatorio-PA/obg1_trivia_2/obg1_prog_avz.py"'
+                                sh 'python3 "${WORKSPACE}/obligatorio-PA/obg1_trivia_2/obg1_prog_avz.py"'
                                 break
                             case '2':
                                 echo 'Ejecutando Entregable 2: Procesamiento de Pedidos'
-                                sh 'javac obligatorio-PA/Entregable_2-1/Entregable2/target/classes/uy/edu/um/Main.java'
+                                sh 'javac ${WORKSPACE}/obligatorio-PA/Entregable_2-1/Entregable2/target/classes/uy/edu/um/Main.java'
                                 sh 'java -cp obligatorio-PA/Entregable_2-1/Entregable2/target/classes uy.edu.um.Main'
                                 break
                             case '3':
                                 echo 'Ejecutando Entregable 3: Consultas en USQL'
-                                sh 'python3 obligatorio-PA/obligatorio_PA/usql/usql_translator.py'
+                                sh 'python3 ${WORKSPACE}/obligatorio-PA/obligatorio_PA/usql/usql_translator.py'
                                 break
                             default:
                                 error 'Opción inválida seleccionada'
@@ -74,7 +74,7 @@ pipeline {
     }
     post {
         success {
-            mail to: "${EMAIL_RECIPIENT}",
+            mail to: "${EMAIL_RECIPIENT}", smtpHost: 'smtp.example.com', smtpPort: 587
                  subject: "Pipeline Completa",
                  body: "La ejecución del pipeline fue exitosa para el Entregable ${params.ENTREGABLE_OPTION}."
         }
