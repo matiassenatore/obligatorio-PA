@@ -20,6 +20,7 @@ pipeline {
                         switch (params.ENTREGABLE_OPTION) {
                             case '1':
                                 echo 'Ejecutando Entregable 1: Trivia'
+sh 'ls obligatorio-PA/obg1_trivia_2'
                                 sh 'python3 obligatorio-PA/obg1_trivia_2/obg1_prog_avz.py'
                                 break
                             case '2':
@@ -74,7 +75,7 @@ pipeline {
     }
     post {
         success {
-            mail to: "${EMAIL_RECIPIENT}",
+            // mail to: "${EMAIL_RECIPIENT}",
                 subject: "Pipeline Completa",
                  body: "La ejecución del pipeline fue exitosa para el Entregable ${params.ENTREGABLE_OPTION}."
         }
