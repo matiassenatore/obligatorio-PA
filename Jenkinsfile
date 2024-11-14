@@ -79,7 +79,7 @@ pipeline {
                     <p>Revisa Jenkins para más detalles: <a href=\"${env.BUILD_URL}\">${env.BUILD_URL}</a></p>
                 """,
                 recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                to: 'progavanzadalg@gmail.com', // Aquí se envía la notificación a tu correo
+                to: 'mnsenatore@gmail.com', // Aquí se envía la notificación a tu correo
                 mimeType: 'text/html'
             )
         }
