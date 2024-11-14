@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        EMAIL_RECIPIENT = 'mnsenatore@hotmail.com'
-    }
     parameters {
         choice(name: 'ENTREGABLE_OPTION', choices: ['1', '2', '3'], description: 'Selecciona el entregable a ejecutar (1: Trivia, 2: Procesamiento de Pedidos, 3: Consultas en USQL)')
     }
@@ -24,8 +21,7 @@ pipeline {
                                 break
                             case '2':
                                 echo 'Ejecutando Entregable 2: Procesamiento de Pedidos'
-                                sh 'javac obligatorio-PA/Entregable%202-1/Entregable2/target/classes/uy/edu/um/Main.java'
-                                sh 'java -cp obligatorio-PA/Entregable%202-1/Entregable2/target/classes uy.edu.um.Main'
+                                sh 'mvn -f obligatorio-PA/Entregable%202-1/Entregable2/pom.xml clean compile exec:java -Dexec.mainClass="uy.edu.um.Main"'
                                 break
                             case '3':
                                 echo 'Ejecutando Entregable 3: Consultas en USQL'
@@ -36,6 +32,7 @@ pipeline {
                         }
                     } catch (Exception e) {
                         echo 'Error ejecutando el entregable seleccionado: ' + e.getMessage()
+                        currentBuild.description = "Falló en ${params.ENTREGABLE_OPTION}"
                         currentBuild.result = 'FAILURE'
                         error('Falló la ejecución del entregable seleccionado. Revisa los detalles.')
                     }
@@ -46,7 +43,6 @@ pipeline {
             steps {
                 script {
                     echo 'Probando el menú de selección...'
-                    // Prueba que cada opción pueda ser ejecutada sin errores
                     try {
                         echo 'Probando Entregable 1'
                         timeout(time: 5, unit: 'MINUTES') {
@@ -55,8 +51,7 @@ pipeline {
 
                         echo 'Probando Entregable 2'
                         timeout(time: 5, unit: 'MINUTES') {
-                            sh 'javac obligatorio-PA/Entregable%202-1/Entregable2/target/classes/uy/edu/um/Main.java'
-                            sh 'java -cp obligatorio-PA/Entregable%202-1/Entregable2/target/classes uy.edu.um.Main --test'
+                            sh 'mvn -f obligatorio-PA/Entregable%202-1/Entregable2/pom.xml test'
                         }
 
                         echo 'Probando Entregable 3'
@@ -73,19 +68,20 @@ pipeline {
         }
     }
     post {
-        success {
-            mail to: "${EMAIL_RECIPIENT}",
-                 subject: "Pipeline Completa",
-                 body: "La ejecución del pipeline fue exitosa para el Entregable ${params.ENTREGABLE_OPTION}."
-        }
-        failure {
-            mail to: "${EMAIL_RECIPIENT}",
-                 subject: "Pipeline Fallida",
-                 body: "Hubo un fallo en la ejecución del pipeline para el Entregable ${params.ENTREGABLE_OPTION}. Revisa los detalles en Jenkins para más información."
+        always {
+            // Envía un correo al finalizar la pipeline
+            emailext(
+                subject: "Pipeline ${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
+                body: """
+                    <p>Pipeline: ${env.JOB_NAME}</p>
+                    <p>Build Number: ${env.BUILD_NUMBER}</p>
+                    <p>Status: ${currentBuild.currentResult}</p>
+                    <p>Revisa Jenkins para más detalles: <a href=\"${env.BUILD_URL}\">${env.BUILD_URL}</a></p>
+                """,
+                recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                to: 'progavanzadalg@gmail.com', // Aquí se envía la notificación a tu correo
+                mimeType: 'text/html'
+            )
         }
     }
 }
-
-
-
-
