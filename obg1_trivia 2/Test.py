@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from Trivia import (
+from obg1_prog_avz import (
     load_questions,
     select_random_questions,
     generate_options,
