@@ -8,14 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Instalar Python') {
-            steps {
-                script {
-                    bat 'choco install python --version=3.9.0 -y'
-                }
-            }
-        }
-
         stage('Checkout Repositorio Principal') {
             steps {
                 script {
@@ -84,7 +76,7 @@ pipeline {
                             bat 'pytest tests/'
                         }
                         stage('Run Consultas en USQL') {
-                            sh 'python obligatorio_PA/usql/usql_translator.py'
+                            bat 'python usql_translator.py'
                         }
                     }
                 }
