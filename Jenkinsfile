@@ -84,13 +84,7 @@ pipeline {
                             }
                         }
                         stage('Deploy Procesar pedidos') {
-                            try {
-                                // Comando de despliegue específico para Procesar pedidos
-                                // sh 'comando de despliegue proyecto pedidos'
-                            } catch (Exception e) {
-                                echo 'Fallo en la etapa de Deploy Procesar pedidos'
-                                currentBuild.result = 'FAILURE'
-                            }
+                            // Comando de despliegue específico para Procesar pedidos
                         }
                     }
                 }
@@ -106,28 +100,34 @@ pipeline {
                     script {
                         stage('Install Dependencies Consultas en USQL') {
                             try {
-                                bat 'python -m pip install -r ../../requirements.txt'
+                                // Subir un nivel para instalar las dependencias
+                                dir('../..') {
+                                    bat 'python -m pip install -r requirements.txt'
+                                }
                             } catch (Exception e) {
                                 echo 'Fallo en la etapa de Install Dependencies Consultas en USQL'
                                 currentBuild.result = 'FAILURE'
                             }
                         }
-                        stage('Test Consultas en USQL') {
-                            timeout(time: 5, unit: 'MINUTES') {
-                                try {
-                                    bat 'pytest tests.py -v'
-                                } catch (Exception e) {
-                                    echo 'Fallo en la etapa de Test Consultas en USQL'
-                                    currentBuild.result = 'FAILURE'
+                        // Volver a la carpeta usql
+                        dir('.') {
+                            stage('Test Consultas en USQL') {
+                                timeout(time: 5, unit: 'MINUTES') {
+                                    try {
+                                        bat 'pytest tests.py -v'
+                                    } catch (Exception e) {
+                                        echo 'Fallo en la etapa de Test Consultas en USQL'
+                                        currentBuild.result = 'FAILURE'
+                                    }
                                 }
                             }
-                        }
-                        stage('Run Consultas en USQL') {
-                            try {
-                                sh 'python usql_translator.py'
-                            } catch (Exception e) {
-                                echo 'Fallo en la etapa de Run Consultas en USQL'
-                                currentBuild.result = 'FAILURE'
+                            stage('Run Consultas en USQL') {
+                                try {
+                                    sh 'python usql_translator.py'
+                                } catch (Exception e) {
+                                    echo 'Fallo en la etapa de Run Consultas en USQL'
+                                    currentBuild.result = 'FAILURE'
+                                }
                             }
                         }
                     }
