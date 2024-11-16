@@ -24,13 +24,28 @@ pipeline {
                 dir('obg1_trivia 2') {
                     script {
                         stage('Install Dependencies El juego de la trivia') {
-                            bat 'python -m pip install -r ../requirements.txt'
+                            try {
+                                bat 'python -m pip install -r ../requirements.txt'
+                            } catch (Exception e) {
+                                echo 'Fallo en la etapa de Install Dependencies El juego de la trivia'
+                                currentBuild.result = 'FAILURE'
+                            }
                         }
                         stage('Test El juego de la trivia') {
-                            bat 'pytest Test.py'
+                            try {
+                                bat 'pytest Test.py'
+                            } catch (Exception e) {
+                                echo 'Fallo en la etapa de Test El juego de la trivia'
+                                currentBuild.result = 'FAILURE'
+                            }
                         }
                         stage('Run El juego de la trivia') {
-                            bat 'python obg1_prog_avz.py'
+                            try {
+                                bat 'python obg1_prog_avz.py'
+                            } catch (Exception e) {
+                                echo 'Fallo en la etapa de Run El juego de la trivia'
+                                currentBuild.result = 'FAILURE'
+                            }
                         }
                     }
                 }
@@ -45,17 +60,37 @@ pipeline {
                 dir('Entregable 2-1/Entregable2') {
                     script {
                         stage('Build Procesar pedidos') {
-                            bat 'mvn clean install'
+                            try {
+                                bat 'mvn clean install'
+                            } catch (Exception e) {
+                                echo 'Fallo en la etapa de Build Procesar pedidos'
+                                currentBuild.result = 'FAILURE'
+                            }
                         }
                         stage('Test Procesar pedidos') {
-                            bat 'mvn test'
+                            try {
+                                bat 'mvn test'
+                            } catch (Exception e) {
+                                echo 'Fallo en la etapa de Test Procesar pedidos'
+                                currentBuild.result = 'FAILURE'
+                            }
                         }
                         stage('Package Procesar pedidos') {
-                            bat 'mvn package'
+                            try {
+                                bat 'mvn package'
+                            } catch (Exception e) {
+                                echo 'Fallo en la etapa de Package Procesar pedidos'
+                                currentBuild.result = 'FAILURE'
+                            }
                         }
                         stage('Deploy Procesar pedidos') {
-                            // Comando de despliegue específico para Procesar pedidos
-                            // sh 'comando de despliegue proyecto pedidos'
+                            try {
+                                // Comando de despliegue específico para Procesar pedidos
+                                // sh 'comando de despliegue proyecto pedidos'
+                            } catch (Exception e) {
+                                echo 'Fallo en la etapa de Deploy Procesar pedidos'
+                                currentBuild.result = 'FAILURE'
+                            }
                         }
                     }
                 }
@@ -70,15 +105,30 @@ pipeline {
                 dir('obligatorio_PA/usql') {
                     script {
                         stage('Install Dependencies Consultas en USQL') {
-                            bat 'python -m pip install -r ../requirements.txt'
+                            try {
+                                bat 'python -m pip install -r ../requirements.txt'
+                            } catch (Exception e) {
+                                echo 'Fallo en la etapa de Install Dependencies Consultas en USQL'
+                                currentBuild.result = 'FAILURE'
+                            }
                         }
                         stage('Test Consultas en USQL') {
                             timeout(time: 5, unit: 'MINUTES') {
-                                bat 'pytest tests.py -v'
+                                try {
+                                    bat 'pytest tests.py -v'
+                                } catch (Exception e) {
+                                    echo 'Fallo en la etapa de Test Consultas en USQL'
+                                    currentBuild.result = 'FAILURE'
+                                }
                             }
                         }
                         stage('Run Consultas en USQL') {
-                            sh 'python usql_translator.py'
+                            try {
+                                sh 'python usql_translator.py'
+                            } catch (Exception e) {
+                                echo 'Fallo en la etapa de Run Consultas en USQL'
+                                currentBuild.result = 'FAILURE'
+                            }
                         }
                     }
                 }
