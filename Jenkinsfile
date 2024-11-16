@@ -10,7 +10,7 @@ pipeline {
     stages {
         
             }
-        }
+
         stage('Checkout Repositorio Principal') {
             steps {
                 script {
