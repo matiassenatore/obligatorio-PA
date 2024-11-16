@@ -8,26 +8,30 @@ pipeline {
     }
 
     stages {
+        stage('Checkout Repositorio Principal') {
+            steps {
+                script {
+                    git url: 'https://github.com/matiassenatore/obligatorio-PA.git', branch: 'main'
+                }
+            }
+        }
+
         stage('Jugar Trivia') {
             when {
                 expression { params.RUN_PROJECT_1 }
             }
             steps {
-                script {
-                    stage('Checkout El juego de la trivia') {
-                        git url: 'https://github.com/matiassenatore/obligatorio-PA/tree/main/obg1_trivia%202.git', branch: 'main'
-                        if (!fileExists('obligatorio-PA/obg1_trivia 2/')) {
-                            error 'Archivo entregable 1 no encontrado.'
+                dir('obg1_trivia 2') {
+                    script {
+                        stage('Install Dependencies El juego de la trivia') {
+                            sh 'python3 -m pip install -r ../requirements.txt'
                         }
-                    }
-                    stage('Install Dependencies El juego de la trivia') {
-                        sh 'python3 -m pip install -r requirements.txt'
-                    }
-                    stage('Test El juego de la trivia') {
-                        sh 'pytest tests/'
-                    }
-                    stage('Run El juego de la trivia') {
-                        sh 'python3 main.py'
+                        stage('Test El juego de la trivia') {
+                            sh 'pytest tests/'
+                        }
+                        stage('Run El juego de la trivia') {
+                            sh 'python3 main.py'
+                        }
                     }
                 }
             }
@@ -38,24 +42,21 @@ pipeline {
                 expression { params.RUN_PROJECT_2 }
             }
             steps {
-                script {
-                    stage('Checkout Procesar pedidos') {
-                        git url: 'https://github.com/matiassenatore/obligatorio-PA/tree/main/Entregable%202-1.git', branch: 'main'
-                        if (!fileExists('obligatorio-PA/Entregable%202-1/Entregable2/')) {
-                            error 'Archivo entregable 2 no encontrado.'
+                dir('Entregable 2-1/Entregable2') {
+                    script {
+                        stage('Build Procesar pedidos') {
+                            sh 'mvn clean install'
                         }
-                    }
-                    stage('Build Procesar pedidos') {
-                        sh 'mvn clean install'
-                    }
-                    stage('Test Procesar pedidos') {
-                        sh 'mvn test'
-                    }
-                    stage('Package Procesar pedidos') {
-                        sh 'mvn package'
-                    }
-                    stage('Deploy Procesar pedidos') {
-
+                        stage('Test Procesar pedidos') {
+                            sh 'mvn test'
+                        }
+                        stage('Package Procesar pedidos') {
+                            sh 'mvn package'
+                        }
+                        stage('Deploy Procesar pedidos') {
+                            // Comando de despliegue específico para Procesar pedidos
+                            // sh 'comando de despliegue proyecto pedidos'
+                        }
                     }
                 }
             }
@@ -66,21 +67,17 @@ pipeline {
                 expression { params.RUN_PROJECT_3 }
             }
             steps {
-                script {
-                    stage('Checkout Consultas en USQL') {
-                        git url: 'https://github.com/matiassenatore/obligatorio-PA/tree/main/obligatorio_PA.git', branch: 'main'
-                        if (!fileExists('obligatorio-PA/obligatorio_PA/usql/')) {
-                            error 'Archivo entregable 3 no encontrado.'
+                dir('obligatorio_PA/usql') {
+                    script {
+                        stage('Install Dependencies Consultas en USQL') {
+                            sh 'python3 -m pip install -r ../requirements.txt'
                         }
-                    }
-                    stage('Install Dependencies Consultas en USQL') {
-                        sh 'python3 -m pip install -r requirements.txt'
-                    }
-                    stage('Test Consultas en USQL') {
-                        sh 'pytest tests/'
-                    }
-                    stage('Run Consultas en USQL') {
-                        sh 'python3 usql_translator.py'
+                        stage('Test Consultas en USQL') {
+                            sh 'pytest tests/'
+                        }
+                        stage('Run Consultas en USQL') {
+                            sh 'python3 usql_translator.py'
+                        }
                     }
                 }
             }
