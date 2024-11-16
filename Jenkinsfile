@@ -30,7 +30,7 @@ pipeline {
                             bat 'pytest tests/'
                         }
                         stage('Run El juego de la trivia') {
-                            sh 'python3 obg1_prog_avz.py'
+                            bat 'python obg1_prog_avz.py'
                         }
                     }
                 }
