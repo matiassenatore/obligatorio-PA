@@ -24,13 +24,13 @@ pipeline {
                 dir('obg1_trivia 2') {
                     script {
                         stage('Install Dependencies El juego de la trivia') {
-                            sh 'python3 -m pip install -r ../../requirements.txt'
+                            bat 'python -m pip install -r ../../requirements.txt'
                         }
                         stage('Test El juego de la trivia') {
-                            sh 'pytest tests/'
+                            bat 'pytest tests/'
                         }
                         stage('Run El juego de la trivia') {
-                            sh 'python3 obg1_trivia 2/obg1_prog_avz.py'
+                            sh 'python3 obg1_prog_avz.py'
                         }
                     }
                 }
@@ -45,13 +45,13 @@ pipeline {
                 dir('Entregable 2-1/Entregable2') {
                     script {
                         stage('Build Procesar pedidos') {
-                            sh 'mvn clean install'
+                            bat 'mvn clean install'
                         }
                         stage('Test Procesar pedidos') {
-                            sh 'mvn test'
+                            bat 'mvn test'
                         }
                         stage('Package Procesar pedidos') {
-                            sh 'mvn package'
+                            bat 'mvn package'
                         }
                         stage('Deploy Procesar pedidos') {
                             // Comando de despliegue específico para Procesar pedidos
@@ -70,13 +70,13 @@ pipeline {
                 dir('obligatorio_PA/usql') {
                     script {
                         stage('Install Dependencies Consultas en USQL') {
-                            sh 'python3 -m pip install -r ../../requirements.txt'
+                            bat 'python -m pip install -r ../../requirements.txt'
                         }
                         stage('Test Consultas en USQL') {
-                            sh 'pytest tests/'
+                            bat 'pytest tests/'
                         }
                         stage('Run Consultas en USQL') {
-                            sh 'python3 obligatorio_PA/usql/usql_translator.py'
+                            sh 'python obligatorio_PA/usql/usql_translator.py'
                         }
                     }
                 }
