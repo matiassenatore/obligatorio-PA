@@ -106,7 +106,7 @@ pipeline {
                     script {
                         stage('Install Dependencies Consultas en USQL') {
                             try {
-                                bat 'python -m pip install -r ../requirements.txt'
+                                bat 'python -m pip install -r ../../requirements.txt'
                             } catch (Exception e) {
                                 echo 'Fallo en la etapa de Install Dependencies Consultas en USQL'
                                 currentBuild.result = 'FAILURE'
