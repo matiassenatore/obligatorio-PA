@@ -16,7 +16,7 @@ class TestTriviaGame(unittest.TestCase):
 
     def test_load_questions(self):
         """Prueba que las preguntas se carguen correctamente desde el archivo CSV."""
-        questions = load_questions('JEOPARDY_CSV.csv')
+        questions = load_questions('reduced_question_set (1).csv')
         self.assertGreaterEqual(len(questions), 5)  # Suponiendo que el archivo tiene al menos 5 preguntas
 
     def test_generate_options(self):
