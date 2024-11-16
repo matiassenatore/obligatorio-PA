@@ -24,7 +24,7 @@ pipeline {
                 dir('obg1_trivia 2') {
                     script {
                         stage('Install Dependencies El juego de la trivia') {
-                            bat 'python -m pip install -r ../../requirements.txt'
+                            bat 'python -m pip install -r ../requirements.txt'
                         }
                         stage('Test El juego de la trivia') {
                             bat 'pytest tests/'
@@ -70,7 +70,7 @@ pipeline {
                 dir('obligatorio_PA/usql') {
                     script {
                         stage('Install Dependencies Consultas en USQL') {
-                            bat 'python -m pip install -r ../../requirements.txt'
+                            bat 'python -m pip install -r ../requirements.txt'
                         }
                         stage('Test Consultas en USQL') {
                             timeout(time: 5, unit: 'MINUTES') {
