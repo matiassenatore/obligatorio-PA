@@ -73,10 +73,10 @@ pipeline {
                             bat 'python -m pip install -r ../../requirements.txt'
                         }
                         stage('Test Consultas en USQL') {
-                            bat 'pytest tests/'
+                            bat 'pytest .'
                         }
                         stage('Run Consultas en USQL') {
-                            bat 'python usql_translator.py'
+                            sh 'python usql_translator.py'
                         }
                     }
                 }
