@@ -73,7 +73,9 @@ pipeline {
                             bat 'python -m pip install -r ../../requirements.txt'
                         }
                         stage('Test Consultas en USQL') {
-                            bat 'tests.py'
+                            timeout(time: 5, unit: 'MINUTES') {
+                                bat 'pytest tests.py -v'
+                            }
                         }
                         stage('Run Consultas en USQL') {
                             sh 'python usql_translator.py'
