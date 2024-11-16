@@ -27,7 +27,7 @@ pipeline {
                             bat 'python -m pip install -r ../requirements.txt'
                         }
                         stage('Test El juego de la trivia') {
-                            bat 'pytest tests/'
+                            bat 'pytest Test.py'
                         }
                         stage('Run El juego de la trivia') {
                             bat 'python obg1_prog_avz.py'
