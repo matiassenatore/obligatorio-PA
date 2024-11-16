@@ -24,13 +24,13 @@ pipeline {
                 dir('obg1_trivia 2') {
                     script {
                         stage('Install Dependencies El juego de la trivia') {
-                            sh 'python3 -m pip install -r ../requirements.txt'
+                            sh 'python3 -m pip install -r ../../requirements.txt'
                         }
                         stage('Test El juego de la trivia') {
                             sh 'pytest tests/'
                         }
                         stage('Run El juego de la trivia') {
-                            sh 'python3 main.py'
+                            sh 'python3 obg1_trivia 2/obg1_prog_avz.py'
                         }
                     }
                 }
@@ -70,13 +70,13 @@ pipeline {
                 dir('obligatorio_PA/usql') {
                     script {
                         stage('Install Dependencies Consultas en USQL') {
-                            sh 'python3 -m pip install -r ../requirements.txt'
+                            sh 'python3 -m pip install -r ../../requirements.txt'
                         }
                         stage('Test Consultas en USQL') {
                             sh 'pytest tests/'
                         }
                         stage('Run Consultas en USQL') {
-                            sh 'python3 usql_translator.py'
+                            sh 'python3 obligatorio_PA/usql/usql_translator.py'
                         }
                     }
                 }
@@ -86,9 +86,15 @@ pipeline {
 
     post {
         always {
-            mail to: 'mnsenatore@gmail.com',
-                 subject: "Pipeline ${currentBuild.fullDisplayName} - ${currentBuild.currentResult}",
-                 body: "Consulta Jenkins para más detalles."
+            script {
+                try {
+                    mail to: 'mnsenatore@gmail.com',
+                         subject: "Pipeline ${currentBuild.fullDisplayName} - ${currentBuild.currentResult}",
+                         body: "Consulta Jenkins para más detalles."
+                } catch (Exception e) {
+                    echo 'Error al enviar el correo. Verifique la configuración SMTP.'
+                }
+            }
         }
     }
 }
