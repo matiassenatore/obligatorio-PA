@@ -8,11 +8,7 @@ pipeline {
     }
 
     stages {
-        stage('Instalar Python') {
-            steps {
-                script {
-                    bat 'choco install python --version=3.9.0 -y'
-                }
+        
             }
         }
         stage('Checkout Repositorio Principal') {
